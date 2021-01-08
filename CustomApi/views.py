@@ -10,6 +10,7 @@ from .models import userLoanData
 from .serializers import userLoanDataSerializers
 import pickle
 import json
+from .serializers import RegistrationSerializer
 # import numpy as np
 # from sklearn import preprocessing
 # import pandas as pd
@@ -24,8 +25,15 @@ def login(request):
     return JsonResponse('Logged In', safe=False)
 
 @api_view(["POST"])
-def register(request):
-    return
+def register(request):	
+	serializer =  RegistrationSerializer(data=request.data)
+	data = {}
+	if serializer.is_valid():
+		account = serializer.save()
+		data['response'] = 'User registered successfully'
+	else:
+		data = serializer.errors
+	return Response(data)
 
 @api_view(["POST"])
 def checkUser(request):
@@ -45,4 +53,3 @@ def checkUser(request):
 	# 	return JsonResponse('Your Status is {}'.format(newdf), safe=False)
 	# except ValueError as e:
 	# 	return Response(e.args[0], status.HTTP_400_BAD_REQUEST)
-

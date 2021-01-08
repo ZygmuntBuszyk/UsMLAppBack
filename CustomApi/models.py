@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class userLoanData(models.Model):
 	GENDER_CHOICES = (
@@ -38,3 +39,10 @@ class userLoanData(models.Model):
 
 	def __str__(self):
 		return '{}, {}'.format(self.lastname, self.firstname)
+
+class Account(AbstractBaseUser):
+	email = models.EmailField(verbose_name="email", max_length=60, unique=True)
+
+	def __str__(self):
+		return self.email	
+
