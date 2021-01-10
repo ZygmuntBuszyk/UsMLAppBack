@@ -18,5 +18,5 @@ from django.urls import path, include
 from CustomApi import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('CustomApi.urls'))
+    path('', include('CustomApi.urls')),
 ]

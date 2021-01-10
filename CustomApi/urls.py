@@ -7,7 +7,7 @@ router.register('CustomApi', views.UserLoanView)
 urlpatterns = [
     path('api/', include(router.urls)),
     path('api/checkUser/', views.checkUser),
-    path('api/login/', views.login),
+    path('api/login/', views.Login),
     path('api/register/', views.register),
 
 ]   

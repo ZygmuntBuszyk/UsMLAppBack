@@ -42,7 +42,15 @@ class userLoanData(models.Model):
 
 class Account(AbstractBaseUser):
 	email = models.EmailField(verbose_name="email", max_length=60, unique=True)
-
+	password = models.CharField(verbose_name="password", max_length=128)
+	approved = models.BooleanField(default=None, null=True)
+	loanData = models.OneToOneField(
+			userLoanData,
+			on_delete=models.CASCADE,
+			default=None, 
+			null=True
+		)
+	
 	def __str__(self):
 		return self.email	
 
