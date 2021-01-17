@@ -14,6 +14,7 @@ from .serializers import AccountSerializer, LoginSerializer
 from django.contrib.auth import authenticate, login, get_user_model
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from django.core import serializers
+from django.http import HttpResponseBadRequest, HttpResponseForbidden
 # import numpy as np
 # from sklearn import preprocessing
 # import pandas as pd
@@ -33,7 +34,7 @@ def Login(request):
 		if user_password == user.password:
 			return Response(user.email)
 		else:
-			return Response('Wrong password')
+			return HttpResponseForbidden('Wrong password')
 	except (Account.DoesNotExist):
 		return Response('User does not exist')
 
@@ -46,6 +47,7 @@ def register(request):
 		data['response'] = 'User registered successfully'
 	else:
 		data = serializer.errors
+		return Response(data, status=status.HTTP_400_CONFLICT)
 	return Response(data)
 
 @api_view(["POST"])

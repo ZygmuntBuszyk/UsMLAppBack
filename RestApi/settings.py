@@ -25,7 +25,15 @@ SECRET_KEY = 'i@pcuad-9=wo_cvu&mjr)%a6$&hnak632$!cz((al-b#k!5)8i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    'https://localhost:3000',
+    'https://localhost:3000',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:3000'
+]
 
 
 # Application definition
@@ -39,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'CustomApi',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -49,7 +58,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  
+    'django.middleware.common.CommonMiddleware',
 ]
+
+MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',  
+    'django.middleware.common.CommonMiddleware',  
+)
+
 
 ROOT_URLCONF = 'RestApi.urls'
 
