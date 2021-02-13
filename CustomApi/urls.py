@@ -9,14 +9,5 @@ urlpatterns = [
     path('api/checkUser/', views.checkUser),
     path('api/login/', views.Login),
     path('api/register/', views.register),
-
-]   
-
-# router = routers.DefaultRouter()
-# router.register(r'users',views.UserViewSet)                                                                         
-
-# urlpatterns = [ 
-#     path('', views.dash, name='dash'),
-#     path('api/', include(router.urls)),
-#     path('api/instances/', views.InstanceList.as_view(), name="instances"),
-# ]
+    path('api/getUserData/', views.getUserData),
+]
